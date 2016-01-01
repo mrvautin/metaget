@@ -21,6 +21,12 @@ metaget.fetch('https://wordpress.com', function (err, meta_response) {
 });
 ```
 
+Response will be a Javascript Object containing all the meta tags from the URL. All tags are output in the example above. Some tags with illegal characters can be accessed by:
+
+``` javascript
+meta_response["og:title"];
+```
+
 ## Contributing
 
 1. Fork it!
