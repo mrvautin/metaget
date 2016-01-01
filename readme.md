@@ -1,6 +1,6 @@
 # metaget
 
-A Node.js module to fetch HTML meta tags from a remote URL
+A Node.js module to fetch HTML meta tags (including Open Graph) from a remote URL
 
 ## Installation
 

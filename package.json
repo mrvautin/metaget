@@ -1,7 +1,7 @@
 {
   "name": "metaget",
-  "version": "1.0.0",
-  "description": "A Node.js module to fetch HTML meta tags from a remote URL",
+  "version": "1.0.2",
+  "description": "A Node.js module to fetch HTML meta tags (including Open Graph) from a remote URL",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,11 +9,14 @@
   "keywords": [
     "metadata",
     "fetch",
+    "meta",
     "remote",
     "meta",
     "tags",
     "html",
-    "parse"
+    "parse",
+    "opengraph",
+    "open graph"
   ],
   "author": "Mark Moffat <mrvautin@gmail.com> (http://mrvautin.com)",
   "license": "ISC",
