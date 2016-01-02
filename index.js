@@ -20,7 +20,7 @@ module.exports = {
 				keys.forEach(function (key) {
 					if (meta[key].attribs != undefined) {
 						if (meta[key].attribs.property && meta[key].attribs.content) {
-							var property = meta[key].attribs.property;
+							var property = meta[key].attribs.property.toLowerCase();
 							var content = meta[key].attribs.content;
 							meta_obj[property] = content;
 						}
