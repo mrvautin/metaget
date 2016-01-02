@@ -27,6 +27,25 @@ Response will be a Javascript Object containing all the meta tags from the URL. 
 meta_response["og:title"];
 ```
 
+## Options
+
+It's possible to set any HTTP headers in the request. This can be done by specifying them as options in the call. If no options are provided the only default header is a User-Agent of "request".
+
+This is how you would specify a "User-Agent" of a Google Bot:
+
+``` javascript
+var metaget = require("metaget");
+metaget.fetch('https://wordpress.com',{headers:{"User-Agent": "Googlebot"}}, function (err, meta_response) {
+	if(err){
+		console.log(err);
+	}else{
+		console.log(meta_response);
+	}
+});
+```
+
+
+
 ## Contributing
 
 1. Fork it!
