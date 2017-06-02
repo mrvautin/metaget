@@ -44,8 +44,6 @@ metaget.fetch('https://wordpress.com',{headers:{"User-Agent": "Googlebot"}}, fun
 });
 ```
 
-
-
 ## Contributing
 
 1. Fork it!

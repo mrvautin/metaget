@@ -1,6 +1,6 @@
 {
   "name": "metaget",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Node.js module to fetch HTML meta tags (including Open Graph) from a remote URL",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "open graph"
   ],
   "author": "Mark Moffat <mrvautin@gmail.com> (http://mrvautin.com)",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/mrvautin/metaget.git"

@@ -6,6 +6,7 @@ module.exports = {
 	fetch: function (uri, user_options, callback) {
 		var options = {
 			url: uri,
+            timeout: 5000,
 			headers: {
 				'User-Agent': 'request'
 			}
@@ -34,7 +35,7 @@ module.exports = {
 		}
 		
 		request.get(options, function (error, response, body) {
-			if (!error && response.statusCode == 200) {
+			if (!error && response.statusCode === 200){
 				var $ = cheerio.load(body);
 				var meta = $('meta');
 				var keys = Object.keys(meta);
@@ -52,7 +53,11 @@ module.exports = {
 				
 				callback(null, meta_obj);
 			}else{
-				callback(new Error('Bad Request' + response.statusCode));
+                if(typeof response.statusCode !== 'undefined'){
+                    callback('Response code: ' + response.statusCode, null);
+                }else{
+                    callback(error, null);
+                }
 			}
 		});
 	}
