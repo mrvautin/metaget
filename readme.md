@@ -13,11 +13,11 @@ npm install metaget --save
 ``` javascript
 var metaget = require("metaget");
 metaget.fetch('https://wordpress.com', function (err, meta_response) {
-	if(err){
-		console.log(err);
-	}else{
-		console.log(meta_response);
-	}
+    if(err){
+        console.log(err);
+    }else{
+        console.log(meta_response);
+    }
 });
 ```
 
@@ -36,11 +36,11 @@ This is how you would specify a "User-Agent" of a Google Bot:
 ``` javascript
 var metaget = require("metaget");
 metaget.fetch('https://wordpress.com',{headers:{"User-Agent": "Googlebot"}}, function (err, meta_response) {
-	if(err){
-		console.log(err);
-	}else{
-		console.log(meta_response);
-	}
+    if(err){
+        console.log(err);
+    }else{
+        console.log(meta_response);
+    }
 });
 ```
 
