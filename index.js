@@ -53,14 +53,10 @@ module.exports = {
 
 				callback(null, meta_obj);
 			} else {
-				if (request) {
-					if (typeof response.statusCode !== 'undefined') {
-						callback('Response code: ' + response.statusCode, null);
-					} else {
-						callback(error, null);
-					}
+				if (response) {
+					callback('Response code: ' + response.statusCode, null);
 				} else {
-					callback(error, null)
+					callback(error, null);
 				}
 			}
 		});
