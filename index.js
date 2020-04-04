@@ -1,64 +1,68 @@
-// A module to fetch HTML meta tags from a remote URL
-var cheerio = require('cheerio');
-var request = require('request');
+const cheerio = require('cheerio');
+const got = require('got');
 
-module.exports = {
-    fetch: function (uri, user_options, callback) {
-        var options = {
-            url: uri,
-            timeout: 5000,
-            headers: {
-                'User-Agent': 'request'
-            }
-        };
-
-        //  setup the args/user_options
-        var user_args = [];
-        for (var i = 0; i < arguments.length; i++) {
-            user_args.push(arguments[i]);
+const fetch = async(uri, userArgs, callback) => {
+    // Set defaults
+    const options = {
+        timeout: 5000,
+        headers: {
+            'User-Agent': 'request'
         }
+    };
 
-        // remove these from arg array
-        uri = user_args.shift();
-        callback = user_args.pop();
+    // If no args are supplied, move callback
+    if(typeof userArgs === 'function'){
+        callback = userArgs;
+    }
 
-        // get user_options if specified
-        if (user_args.length > 0) {
-            user_options = user_args.shift();
-        } else {
-            user_options = null;
-        }
-
-        // override default headers
-        if (user_options) {
-            options.headers = user_options.headers;
-        }
-
-        request.get(options, function (error, response, body) {
-            if (!error && response.statusCode === 200) {
-                var $ = cheerio.load(body);
-                var meta = $('meta');
-                var keys = Object.keys(meta);
-                var meta_obj = {};
-                keys.forEach(function (key) {
-                    if (meta[key].attribs != undefined) {
-                        if (meta[key].attribs.property && meta[key].attribs.content) {
-                            meta_obj[meta[key].attribs.property] = meta[key].attribs.content;
-                        }
-                        if (meta[key].attribs.name && meta[key].attribs.content) {
-                            meta_obj[meta[key].attribs.name] = meta[key].attribs.content;
-                        }
-                    }
-                });
-
-                callback(null, meta_obj);
-            } else {
-                if (response && typeof response.statusCode !== 'undefined') {
-                    callback('Response code: ' + response.statusCode, null);
-                } else {
-                    callback(error, null);
-                }
-            }
+    // override supplied args
+    if(typeof userArgs === 'object'){
+        Object.keys(userArgs).forEach((arg) => {
+            options[arg] = userArgs[arg];
         });
     }
+
+    // Fetch the meta data
+    let response;
+    try{
+        response = await got.get(uri, {
+            options
+        });
+    }catch(ex){
+        return respond({}, ex.code, callback);
+    }
+
+    // Parse the meta data
+    const $ = cheerio.load(response.body);
+    const meta = $('meta');
+    const keys = Object.keys(meta);
+    const metaData = {};
+    keys.forEach((key) => {
+        if(meta[key].attribs !== undefined){
+            if(meta[key].attribs.property && meta[key].attribs.content){
+                metaData[meta[key].attribs.property] = meta[key].attribs.content;
+            }
+            if(meta[key].attribs.name && meta[key].attribs.content){
+                metaData[meta[key].attribs.name] = meta[key].attribs.content;
+            }
+        }
+    });
+
+    // Response
+    return respond(metaData, null, callback);
+};
+
+// Allows for callback or promise response
+const respond = (data, error, callback) => {
+    if(!callback){
+        if(error){
+            return Promise.reject(error);
+        }
+        return Promise.resolve(data);
+    }
+    return callback(error, data);
+};
+
+module.exports = {
+    fetch
 };
