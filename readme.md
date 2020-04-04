@@ -2,6 +2,10 @@
 
 A Node.js module to fetch HTML meta tags (including Open Graph) from a remote URL
 
+[![Github stars](https://img.shields.io/github/stars/mrvautin/metaget.svg?style=social&label=Star)](https://github.com/mrvautin/metaget)
+
+[![Actions Status](https://github.com/mrvautin/metaget/workflows/metaget-tests/badge.svg)](https://github.com/mrvautin/metaget/actions)
+
 ## Installation
 
 ```
