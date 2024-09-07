@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
-    "got": "^10.6.0"
+    "got": "^12.6.0"
   },
   "devDependencies": {
     "jest": "^25.2.7",
